@@ -1,7 +1,7 @@
 namespace :course_chart do
 
-  desc "Scrape of a schedule.berkeley url into this semester's course surveys to be surveyed"
-  task :update do
+  desc "Recent scrape of a schedule.berkeley url into this semester's course surveys to be surveyed"
+  task :update_recent do
     # establish database connection
     Course.connection
 
@@ -76,7 +76,7 @@ namespace :course_chart do
       @ee_type_signals = CourseType.new
       @ee_type_signals.chart_pref_x = 0.3
       @ee_type_signals.chart_pref_y = 0.0
-      @ee_type_signals.name = "signals / controls"
+      @ee_type_signals.name = "signals"
       @ee_type_signals.color = "#80DEEA"
 
       @ee_type_robotics = CourseType.new
@@ -892,17 +892,6 @@ namespace :course_chart do
       @cs189_to_188.prereq_id = @cs188.id
       @cs189_to_188.is_recommended = false
       @cs_prereqs.push(@cs189_to_188)
-    
-    #   @eecs151 = Course.where(:course_number => 151, :department => 5)[0]
-    #   @eecs151.course_type_id = @cs_type_applications.id
-    #   @eecs151_node = CourseChart.new
-    #   @eecs151_node.course_id = @eecs151.id
-    #   @eecs151_node.bias_x = 0
-    #   @eecs151_node.bias_y = 0
-    #   @eecs151_node.depth = 4
-    #   @eecs151_node.show = true
-    #   @courses.push(@eecs151)
-    #   @course_nodes.push(@eecs151_node)
 
       @cs168_to_61b = CoursePrereq.new
       @cs168_to_61b.course_id = @cs168.id
@@ -1082,13 +1071,7 @@ namespace :course_chart do
       gen_prereqs
       save_prereqs
     end
-
-    CourseChart.delete_all
-    CoursePrereq.delete_all
-    CourseType.delete_all
-
     run_all
-    
   end
 end
   

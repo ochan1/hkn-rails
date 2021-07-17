@@ -15,11 +15,12 @@ module CourseChartHelper
 
     def generate_course(course_chart, link_function)
       course = course_chart.course
+      course_department_id = (course.department_id == 2 ? "CS" : (course.department_id == 1 ? "EE" : (course.department_id == 5 ? "EECS" : "NA")))
       c = {
         id: course.id,
         department_id: course.department_id,
         name: course.full_course_number,
-        link: link_function.call(course.department_id == 2 ? "CS" : "EE", course.full_course_number),
+        link: link_function.call(course_department_id, course.full_course_number),
         prereqs: CoursePrereq.where(course_id: course.id).select("id, course_id, prereq_id, is_recommended"),
         type_id: course.course_type_id,
         bias_x: course_chart.bias_x,
