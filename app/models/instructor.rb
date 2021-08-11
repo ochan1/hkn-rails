@@ -101,7 +101,7 @@ class Instructor < ActiveRecord::Base
       return nil
     end
     
-    faculty_photo_homepage_url = "https://www.eecs.berkeley.edu/Faculty/Photos/Homepages"
+    faculty_photo_homepage_url = "http://www.eecs.berkeley.edu/Faculty/Photos/Homepages"
 
     first_name_downcased = first_name[/\w+/].downcase
     last_name_downcased = last_name[/\w+/].downcase
