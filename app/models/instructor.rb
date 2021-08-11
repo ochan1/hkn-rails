@@ -101,12 +101,14 @@ class Instructor < ActiveRecord::Base
       return nil
     end
     
+    faculty_photo_homepage_url = "https://www.eecs.berkeley.edu/Faculty/Photos/Homepages"
+
     first_name_downcased = first_name[/\w+/].downcase
     last_name_downcased = last_name[/\w+/].downcase
     
-    first_last_name_only = "https://www.eecs.berkeley.edu/Faculty/Photos/Homepages/#{first_name_downcased}#{last_name_downcased}.jpg"
-    first_name_only = "https://www.eecs.berkeley.edu/Faculty/Photos/Homepages/#{first_name_downcased}.jpg"
-    last_name_only = "https://www.eecs.berkeley.edu/Faculty/Photos/Homepages/#{last_name_downcased}.jpg"
+    first_last_name_only = "#{faculty_photo_homepage_url}/#{first_name_downcased}#{last_name_downcased}.jpg"
+    first_name_only = "#{faculty_photo_homepage_url}/#{first_name_downcased}.jpg"
+    last_name_only = "#{faculty_photo_homepage_url}/#{last_name_downcased}.jpg"
     
     # Ordering is important here, with the first valid URL that returns an image to be used
     urls = [first_last_name_only, first_name_only, last_name_only]
